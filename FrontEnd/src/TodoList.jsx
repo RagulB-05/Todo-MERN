@@ -54,7 +54,10 @@ export const TodoList = () => {
         <h3 className="text-3xl font-medium">Add Items:</h3>
       </div>
       <div>
-        <form onSubmit={handleSubmit} className="flex gap-2.5 justify-center">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-wrap gap-2.5 justify-center"
+        >
           <input
             className=" w-50 p-1.5 bg-gray-100 rounded-sm"
             type="text"

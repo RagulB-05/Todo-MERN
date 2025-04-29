@@ -34,7 +34,7 @@ const todoModel = mongoose.model("Todo", todoSchema);
 
 // POST API
 
-server.post("/todos", async (req, res) => {
+const createTodo = async (req, res) => {
   const { title, description } = req.body;
 
   try {
@@ -45,11 +45,9 @@ server.post("/todos", async (req, res) => {
     console.log(error);
     res.status(500).json({ message: error.message });
   }
-});
+};
 
-// GET API
-
-server.get("/todos", async (req, res) => {
+const getTodo = async (req, res) => {
   try {
     const todos = await todoModel.find();
     res.json(todos);
@@ -57,11 +55,9 @@ server.get("/todos", async (req, res) => {
     console.log(error);
     res.status(500).json({ message: error.message });
   }
-});
+};
 
-//PUT API
-
-server.put("/todos/:id", async (req, res) => {
+const updateTodo = async (req, res) => {
   try {
     const { title, description } = req.body;
     const id = req.params.id;
@@ -80,11 +76,9 @@ server.put("/todos/:id", async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-});
+};
 
-// Delete API
-
-server.delete("/todos/:id", async (req, res) => {
+const deleteTodo = async (req, res) => {
   try {
     const id = req.params.id;
     const updatedTodo = await todoModel.findByIdAndDelete(id);
@@ -92,7 +86,11 @@ server.delete("/todos/:id", async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-});
+};
+
+server.route("/todos").post(createTodo).get(getTodo);
+
+server.route("/todos/:id").put(updateTodo).delete(deleteTodo);
 
 port = 3000;
 

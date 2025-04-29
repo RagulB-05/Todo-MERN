@@ -56,7 +56,7 @@ export const Todos = ({ li, list, todos, setTodos }) => {
       });
       setTodos([...todos, updatedTodos]);
     }
-    toast.info("Deleted Successfully");
+    toast.success("Deleted Successfully");
   };
 
   return (
